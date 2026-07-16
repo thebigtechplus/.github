@@ -61,11 +61,13 @@ ensure_repo_file_if_missing() {
 }
 
 seed_repo_templates() {
-  local readme_content agents_content claude_content
+  local readme_content agents_content claude_content precommit_content markdownlint_content
   readme_content="$(fetch_template README.md)"
   readme_content="${readme_content//\{\{REPO\}\}/$REPO}"
   agents_content="$(fetch_template AGENTS.md)"
   claude_content="$(fetch_template CLAUDE.md)"
+  precommit_content="$(fetch_template .pre-commit-config.yaml)"
+  markdownlint_content="$(fetch_template .markdownlint.yaml)"
 
   echo "→ ensuring README.md"
   ensure_repo_file_if_missing "README.md" "$readme_content" "docs: add README from org template"
@@ -75,6 +77,29 @@ seed_repo_templates() {
 
   echo "→ ensuring CLAUDE.md"
   ensure_repo_file_if_missing "CLAUDE.md" "$claude_content" "docs: add CLAUDE.md from org template"
+
+  echo "→ ensuring .pre-commit-config.yaml"
+  ensure_repo_file_if_missing ".pre-commit-config.yaml" "$precommit_content" "chore: add pre-commit config from org template"
+
+  echo "→ ensuring .markdownlint.yaml"
+  ensure_repo_file_if_missing ".markdownlint.yaml" "$markdownlint_content" "chore: add markdownlint config from org template"
+}
+
+print_pre_commit_guide() {
+  cat <<EOF
+
+→ pre-commit: install locally (one-time per clone)
+  pip install pre-commit    # or: brew install pre-commit
+
+  pre-commit install        # installs pre-commit + commit-msg hooks (see default_install_hook_types)
+  pre-commit run --all-files   # optional: verify the repo now
+
+  Hooks: whitespace, YAML, merge conflicts, large files, private keys, Conventional Commits,
+         shellcheck, markdownlint, gitleaks.
+
+  Docs: https://pre-commit.com/
+
+EOF
 }
 
 usage() {
@@ -206,6 +231,8 @@ gh api -X PATCH "repos/$FULL" --input "$MERGE_JSON" >/dev/null
 rm -f "$MERGE_JSON"
 
 seed_repo_templates
+
+print_pre_commit_guide
 
 print_branch_protection_guide() {
   cat <<EOF

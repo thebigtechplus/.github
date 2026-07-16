@@ -68,6 +68,8 @@ function Seed-RepoTemplates {
     $readme = (Get-TemplateContent "README.md") -replace '\{\{REPO\}\}', $Repo
     $agents = Get-TemplateContent "AGENTS.md"
     $claude = Get-TemplateContent "CLAUDE.md"
+    $precommit = Get-TemplateContent ".pre-commit-config.yaml"
+    $markdownlint = Get-TemplateContent ".markdownlint.yaml"
 
     Write-Host "→ ensuring README.md"
     Ensure-RepoFileIfMissing -Path "README.md" -Content $readme -Message "docs: add README from org template"
@@ -77,6 +79,26 @@ function Seed-RepoTemplates {
 
     Write-Host "→ ensuring CLAUDE.md"
     Ensure-RepoFileIfMissing -Path "CLAUDE.md" -Content $claude -Message "docs: add CLAUDE.md from org template"
+
+    Write-Host "→ ensuring .pre-commit-config.yaml"
+    Ensure-RepoFileIfMissing -Path ".pre-commit-config.yaml" -Content $precommit -Message "chore: add pre-commit config from org template"
+
+    Write-Host "→ ensuring .markdownlint.yaml"
+    Ensure-RepoFileIfMissing -Path ".markdownlint.yaml" -Content $markdownlint -Message "chore: add markdownlint config from org template"
+}
+
+function Show-PreCommitGuide {
+    Write-Host ""
+    Write-Host "→ pre-commit: install locally (one-time per clone)"
+    Write-Host "  pip install pre-commit    # or: brew install pre-commit"
+    Write-Host ""
+    Write-Host "  pre-commit install        # installs pre-commit + commit-msg hooks"
+    Write-Host "  pre-commit run --all-files   # optional: verify the repo now"
+    Write-Host ""
+    Write-Host "  Hooks: whitespace, YAML, merge conflicts, large files, private keys,"
+    Write-Host "         Conventional Commits, shellcheck, markdownlint, gitleaks."
+    Write-Host ""
+    Write-Host "  Docs: https://pre-commit.com/"
 }
 
 function Show-Usage {
@@ -176,6 +198,8 @@ Write-Host "→ merge settings (squash only)"
 '@ | gh api -X PATCH "repos/$Full" --input - | Out-Null
 
 Seed-RepoTemplates
+
+Show-PreCommitGuide
 
 function Show-BranchProtectionGuide {
     Write-Host ""
