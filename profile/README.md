@@ -1,6 +1,6 @@
 # BigTech+
 
-Building BIG softwares.
+Building BIG software.
 
 ## Links
 
