@@ -31,7 +31,17 @@ Issue form labels (`bug`, `enhancement`) must also exist in each repository that
 
 ## New repositories
 
-When creating a private product repo, follow [`docs/new-repo.md`](docs/new-repo.md) (CODEOWNERS, labels, branch protection, optional Dependabot/CI).
+Bootstrap **one repo at a time** (not all repos automatically):
+
+```bash
+./scripts/bootstrap-repo.sh <repo-name> --create
+```
+
+```powershell
+pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create
+```
+
+Details: [`docs/new-repo.md`](docs/new-repo.md).
 
 ## Profile
 
