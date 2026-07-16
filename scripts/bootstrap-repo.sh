@@ -19,10 +19,63 @@
 set -euo pipefail
 
 ORG="thebigtechplus"
+TEMPLATE_REPO="thebigtechplus/.github"
 DEVELOPERS_TEAM="developers"
 ADMINS_TEAM="admins"
 CODEOWNERS_BODY='* @thebigtechplus/admins
 '
+
+b64_decode() {
+  if command -v openssl >/dev/null 2>&1; then
+    openssl base64 -d -A 2>/dev/null || openssl base64 -d
+  else
+    base64 --decode 2>/dev/null || base64 -d
+  fi
+}
+
+fetch_template() {
+  local name="$1"
+  local script_dir
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  if [[ -f "$script_dir/templates/$name" ]]; then
+    cat "$script_dir/templates/$name"
+    return
+  fi
+  gh api "repos/${TEMPLATE_REPO}/contents/scripts/templates/${name}" --jq .content | tr -d '\n' | b64_decode
+}
+
+ensure_repo_file_if_missing() {
+  local path="$1"
+  local content="$2"
+  local message="$3"
+
+  if gh api "repos/$FULL/contents/$path" --jq .sha >/dev/null 2>&1; then
+    echo "  skipped ($path exists)"
+    return
+  fi
+
+  gh api -X PUT "repos/$FULL/contents/$path" \
+    -f message="$message" \
+    -f content="$(b64_encode "$content")" >/dev/null
+  echo "  added $path"
+}
+
+seed_repo_templates() {
+  local readme_content agents_content claude_content
+  readme_content="$(fetch_template README.md)"
+  readme_content="${readme_content//\{\{REPO\}\}/$REPO}"
+  agents_content="$(fetch_template AGENTS.md)"
+  claude_content="$(fetch_template CLAUDE.md)"
+
+  echo "→ ensuring README.md"
+  ensure_repo_file_if_missing "README.md" "$readme_content" "docs: add README from org template"
+
+  echo "→ ensuring AGENTS.md"
+  ensure_repo_file_if_missing "AGENTS.md" "$agents_content" "docs: add AGENTS.md from org template"
+
+  echo "→ ensuring CLAUDE.md"
+  ensure_repo_file_if_missing "CLAUDE.md" "$claude_content" "docs: add CLAUDE.md from org template"
+}
 
 usage() {
   cat <<'EOF'
@@ -151,6 +204,8 @@ cat >"$MERGE_JSON" <<'EOF'
 EOF
 gh api -X PATCH "repos/$FULL" --input "$MERGE_JSON" >/dev/null
 rm -f "$MERGE_JSON"
+
+seed_repo_templates
 
 print_branch_protection_guide() {
   cat <<EOF

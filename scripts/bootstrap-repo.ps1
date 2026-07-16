@@ -28,9 +28,56 @@ param(
 $ErrorActionPreference = "Stop"
 
 $Org = "thebigtechplus"
+$TemplateRepo = "thebigtechplus/.github"
 $DevelopersTeam = "developers"
 $AdminsTeam = "admins"
 $CodeownersBody = "* @thebigtechplus/admins`n"
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+function Get-TemplateContent {
+    param([string]$Name)
+    $localPath = Join-Path $ScriptDir "templates/$Name"
+    if (Test-Path $localPath) {
+        return Get-Content -Raw -Path $localPath
+    }
+    $b64 = gh api "repos/$TemplateRepo/contents/scripts/templates/$Name" --jq .content 2>$null
+    if ($LASTEXITCODE -ne 0) { throw "failed to fetch template $Name" }
+    $bytes = [Convert]::FromBase64String(($b64 -replace "`n", ""))
+    return [System.Text.Encoding]::UTF8.GetString($bytes)
+}
+
+function Ensure-RepoFileIfMissing {
+    param(
+        [string]$Path,
+        [string]$Content,
+        [string]$Message
+    )
+    gh api "repos/$Full/contents/$Path" --jq .sha 2>$null | Out-Null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  skipped ($Path exists)"
+        return
+    }
+    $contentB64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($Content))
+    gh api -X PUT "repos/$Full/contents/$Path" `
+        -f message="$Message" `
+        -f content="$contentB64" | Out-Null
+    Write-Host "  added $Path"
+}
+
+function Seed-RepoTemplates {
+    $readme = (Get-TemplateContent "README.md") -replace '\{\{REPO\}\}', $Repo
+    $agents = Get-TemplateContent "AGENTS.md"
+    $claude = Get-TemplateContent "CLAUDE.md"
+
+    Write-Host "→ ensuring README.md"
+    Ensure-RepoFileIfMissing -Path "README.md" -Content $readme -Message "docs: add README from org template"
+
+    Write-Host "→ ensuring AGENTS.md"
+    Ensure-RepoFileIfMissing -Path "AGENTS.md" -Content $agents -Message "docs: add AGENTS.md from org template"
+
+    Write-Host "→ ensuring CLAUDE.md"
+    Ensure-RepoFileIfMissing -Path "CLAUDE.md" -Content $claude -Message "docs: add CLAUDE.md from org template"
+}
 
 function Show-Usage {
     @"
@@ -127,6 +174,8 @@ Write-Host "→ merge settings (squash only)"
   "has_wiki": false
 }
 '@ | gh api -X PATCH "repos/$Full" --input - | Out-Null
+
+Seed-RepoTemplates
 
 function Show-BranchProtectionGuide {
     Write-Host ""
