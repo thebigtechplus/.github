@@ -53,6 +53,10 @@ ensure_repo_file_if_missing() {
   local content="$2"
   local message="$3"
 
+  # Command substitution strips the final newline; restore it so seeded
+  # files pass the end-of-file-fixer pre-commit hook.
+  [[ "$content" == *$'\n' ]] || content+=$'\n'
+
   if gh api "repos/$FULL/contents/$path" --jq .sha >/dev/null 2>&1; then
     echo "  skipped ($path exists)"
     return
