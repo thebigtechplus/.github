@@ -1,34 +1,38 @@
-# BigTech+ organization defaults
+# BigTech+ `.github` repository
 
-This repository provides default community health files, issue and pull request templates, and shared GitHub Actions for the [BigTech+](https://github.com/thebigtechplus) organization.
+Canonical GitHub defaults and engineering standards for the [BigTech+](https://github.com/thebigtechplus) organization.
 
-Repositories in the organization that do not define their own copies inherit these defaults.
+BigTech+ is primarily a **private** organization. This repository stays **public** because GitHub requires that for organization-wide community health files and issue/PR templates.
 
-## Contents
+## What inherits automatically
+
+Repositories that do not define their own copies can inherit:
 
 | Path | Purpose |
 | --- | --- |
-| [`profile/README.md`](profile/README.md) | Organization profile shown on [github.com/thebigtechplus](https://github.com/thebigtechplus) |
-| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Community standards (Contributor Covenant) |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to contribute |
-| [`SECURITY.md`](SECURITY.md) | Vulnerability reporting policy |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Expected conduct |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Branching, commits, and review process |
+| [`SECURITY.md`](SECURITY.md) | How to report security issues |
 | [`SUPPORT.md`](SUPPORT.md) | Where to get help |
-| [`CODEOWNERS`](CODEOWNERS) | Default review ownership for this repository |
-| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug report and feature request forms |
-| [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) | Default pull request checklist |
-| [`.github/workflows/`](.github/workflows/) | Reusable workflows for other repositories |
-| [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot updates for GitHub Actions in this repository |
+| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug and feature issue forms |
+| [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) | Pull request checklist |
+
+## What does not inherit
+
+Copy these into each product repository (or configure there) when needed:
+
+| Path | Purpose |
+| --- | --- |
+| [`CODEOWNERS`](CODEOWNERS) | Review ownership (`@thebigtechplus/developers`) |
+| [`.github/dependabot.yml`](.github/dependabot.yml) | Dependency update automation |
+| Workflows under `.github/workflows/` | CI/CD (add real workflows when products need them) |
+
+Issue form labels (`bug`, `enhancement`) must also exist in each repository that uses the inherited forms.
+
+## Profile
+
+[`profile/README.md`](profile/README.md) is shown on [github.com/thebigtechplus](https://github.com/thebigtechplus).
 
 ## Website
 
 - [www.bigtechplus.io](https://www.bigtechplus.io)
-
-## Reusable workflows
-
-Other repositories can call workflows from this repository, for example:
-
-```yaml
-jobs:
-  ci:
-    uses: thebigtechplus/.github/.github/workflows/reusable-ci.yml@main
-```
