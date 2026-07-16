@@ -61,13 +61,16 @@ ensure_repo_file_if_missing() {
 }
 
 seed_repo_templates() {
-  local readme_content agents_content claude_content precommit_content markdownlint_content
+  local year readme_content agents_content claude_content precommit_content markdownlint_content license_content
+  year="$(date +%Y)"
   readme_content="$(fetch_template README.md)"
   readme_content="${readme_content//\{\{REPO\}\}/$REPO}"
   agents_content="$(fetch_template AGENTS.md)"
   claude_content="$(fetch_template CLAUDE.md)"
   precommit_content="$(fetch_template .pre-commit-config.yaml)"
   markdownlint_content="$(fetch_template .markdownlint.yaml)"
+  license_content="$(fetch_template LICENSE)"
+  license_content="${license_content//\{\{YEAR\}\}/$year}"
 
   echo "→ ensuring README.md"
   ensure_repo_file_if_missing "README.md" "$readme_content" "docs: add README from org template"
@@ -77,6 +80,9 @@ seed_repo_templates() {
 
   echo "→ ensuring CLAUDE.md"
   ensure_repo_file_if_missing "CLAUDE.md" "$claude_content" "docs: add CLAUDE.md from org template"
+
+  echo "→ ensuring LICENSE"
+  ensure_repo_file_if_missing "LICENSE" "$license_content" "chore: add proprietary LICENSE from org template"
 
   echo "→ ensuring .pre-commit-config.yaml"
   ensure_repo_file_if_missing ".pre-commit-config.yaml" "$precommit_content" "chore: add pre-commit config from org template"

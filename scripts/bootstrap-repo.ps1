@@ -65,11 +65,13 @@ function Ensure-RepoFileIfMissing {
 }
 
 function Seed-RepoTemplates {
+    $year = Get-Date -Format "yyyy"
     $readme = (Get-TemplateContent "README.md") -replace '\{\{REPO\}\}', $Repo
     $agents = Get-TemplateContent "AGENTS.md"
     $claude = Get-TemplateContent "CLAUDE.md"
     $precommit = Get-TemplateContent ".pre-commit-config.yaml"
     $markdownlint = Get-TemplateContent ".markdownlint.yaml"
+    $license = (Get-TemplateContent "LICENSE") -replace '\{\{YEAR\}\}', $year
 
     Write-Host "→ ensuring README.md"
     Ensure-RepoFileIfMissing -Path "README.md" -Content $readme -Message "docs: add README from org template"
@@ -79,6 +81,9 @@ function Seed-RepoTemplates {
 
     Write-Host "→ ensuring CLAUDE.md"
     Ensure-RepoFileIfMissing -Path "CLAUDE.md" -Content $claude -Message "docs: add CLAUDE.md from org template"
+
+    Write-Host "→ ensuring LICENSE"
+    Ensure-RepoFileIfMissing -Path "LICENSE" -Content $license -Message "chore: add proprietary LICENSE from org template"
 
     Write-Host "→ ensuring .pre-commit-config.yaml"
     Ensure-RepoFileIfMissing -Path ".pre-commit-config.yaml" -Content $precommit -Message "chore: add pre-commit config from org template"
