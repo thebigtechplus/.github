@@ -1,24 +1,44 @@
 # Contributing to BigTech+
 
-First off, thank you for contributing! 
+Thank you for contributing. This guide applies to repositories that inherit organization defaults from [thebigtechplus/.github](https://github.com/thebigtechplus/.github).
 
-## Branching Strategy
-We follow a standard feature-branch workflow. 
-1. Branch off `main`.
-2. Name your branch using the format: `type/issue-number-brief-description` (e.g., `feat/12-add-login`, `bugfix/34-fix-header-alignment`).
-3. Push your branch and open a Pull Request against `main`.
+## Code of conduct
 
-## Commit Messages
-We prefer [Conventional Commits](https://www.conventionalcommits.org/).
-* `feat:` A new feature
-* `fix:` A bug fix
-* `docs:` Documentation only changes
-* `style:` Changes that do not affect the meaning of the code (white-space, formatting, etc.)
-* `refactor:` A code change that neither fixes a bug nor adds a feature
-* `test:` Adding missing tests or correcting existing tests
+Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Report concerns to [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io).
 
-## Pull Request Process
-1. Ensure your PR is linked to an existing issue.
-2. Fill out the PR template completely.
-3. Request a review from at least one other developer on the `developers` team.
-4. Once approved and all CI checks pass, you may squash and merge your branch.
+## Getting help
+
+See [SUPPORT.md](SUPPORT.md) for where to ask questions and how to report bugs or request features. Report security issues privately using [SECURITY.md](SECURITY.md).
+
+## Branching
+
+Use a feature-branch workflow:
+
+1. Branch from `main`.
+2. Name branches `type/issue-number-brief-description` (for example, `feat/12-add-login` or `fix/34-header-alignment`).
+3. Open a pull request against `main`.
+
+## Commit messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+| Prefix | Use |
+| --- | --- |
+| `feat:` | New feature |
+| `fix:` | Bug fix |
+| `docs:` | Documentation only |
+| `style:` | Formatting that does not change behavior |
+| `refactor:` | Code change that is not a fix or feature |
+| `test:` | Tests |
+| `chore:` | Maintenance, tooling, or configuration |
+| `ci:` | Continuous integration |
+
+## Pull requests
+
+1. Link the pull request to an issue when one exists.
+2. Complete the pull request template.
+3. Request review from at least one member of the [`developers`](https://github.com/orgs/thebigtechplus/teams/developers) team.
+4. Ensure required checks pass.
+5. Squash and merge after approval.
+
+Product repositories should use `@thebigtechplus/developers` in `CODEOWNERS` so the same team is requested for review by default.
