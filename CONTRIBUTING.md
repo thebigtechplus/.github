@@ -13,6 +13,15 @@ gh bootstrap-repo <repo-name> --create
 
 See [docs/new-repo.md](docs/new-repo.md).
 
+## AI-assisted development
+
+BigTech+ developers use AI tools (Claude, Codex, Cursor) as assistants, not as authors of record.
+
+- Canonical guidelines: [AGENTS.md](AGENTS.md) in each product repository (seeded by bootstrap)
+- Claude Code: [CLAUDE.md](CLAUDE.md) imports `@AGENTS.md` — edit `AGENTS.md` only, not duplicate rules in `CLAUDE.md`
+- You are responsible for reviewing, testing, and merging all AI-assisted changes
+- Do not add AI co-author trailers to commits
+
 ## Conduct
 
 Follow the [Code of Conduct](CODE_OF_CONDUCT.md). Report concerns to [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io).
@@ -38,6 +47,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 | `docs:` | Documentation only |
 | `style:` | Formatting that does not change behavior |
 | `refactor:` | Code change that is not a fix or feature |
+| `perf:` | Performance improvement |
 | `test:` | Tests |
 | `chore:` | Maintenance, tooling, or configuration |
 | `ci:` | Continuous integration |
