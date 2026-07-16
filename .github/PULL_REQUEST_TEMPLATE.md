@@ -6,14 +6,6 @@
 
 Fixes #
 
-## Type of change
-
-- [ ] Bug fix (non-breaking)
-- [ ] New feature (non-breaking)
-- [ ] Breaking change
-- [ ] Documentation update
-- [ ] Chore / tooling
-
 ## Test plan
 
 <!-- How did you verify this change? -->
