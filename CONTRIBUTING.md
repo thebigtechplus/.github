@@ -46,8 +46,8 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 1. Link the pull request to an issue when one exists.
 2. Complete the pull request template.
-3. Request review from at least one member of the [`developers`](https://github.com/orgs/thebigtechplus/teams/developers) team.
+3. Request review from at least one member of the [`admins`](https://github.com/orgs/thebigtechplus/teams/admins) team.
 4. Ensure required checks pass.
 5. Squash and merge after approval.
 
-Product repositories should include a `CODEOWNERS` file that assigns `@thebigtechplus/developers` (this repository’s `CODEOWNERS` does not cascade to other repos).
+Product repositories should include a `CODEOWNERS` file that assigns `@thebigtechplus/admins` (this repository’s `CODEOWNERS` does not cascade to other repos).

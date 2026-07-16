@@ -29,7 +29,7 @@ $ErrorActionPreference = "Stop"
 $Org = "thebigtechplus"
 $DevelopersTeam = "developers"
 $AdminsTeam = "admins"
-$CodeownersBody = "* @thebigtechplus/developers`n"
+$CodeownersBody = "* @thebigtechplus/admins`n"
 
 function Show-Usage {
     @"
@@ -68,7 +68,7 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "→ repository exists: $Full"
 } elseif ($Create) {
     Write-Host "→ creating private repository: $Full"
-    gh repo create $Full --private --default-branch main --confirm
+    gh repo create $Full --private
     if ($LASTEXITCODE -ne 0) { throw "failed to create $Full" }
 } else {
     throw "repository $Full not found. Re-run with -Create, or create it first."
@@ -102,7 +102,7 @@ if ($sha) {
         -f content="$contentB64" | Out-Null
 }
 
-Write-Host "→ team access (developers: write, admins: admin)"
+Write-Host "→ team access (developers: write, admins: admin; reviews via CODEOWNERS → admins)"
 '{"permission":"push"}' | gh api -X PUT "orgs/$Org/teams/$DevelopersTeam/repos/$Full" --input - | Out-Null
 '{"permission":"admin"}' | gh api -X PUT "orgs/$Org/teams/$AdminsTeam/repos/$Full" --input - | Out-Null
 

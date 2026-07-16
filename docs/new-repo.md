@@ -57,8 +57,9 @@ If you already have this repo checked out:
 ## What bootstrap configures
 
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
-- Root `CODEOWNERS` → `@thebigtechplus/developers`
+- Root `CODEOWNERS` → `@thebigtechplus/admins`
 - Team access: `developers` (write), `admins` (admin)
+- Code review: required from `admins` via CODEOWNERS + branch protection
 - Squash-only merges, delete branch on merge, wiki off
 - Branch protection on `main` (warns if GitHub Free limits block some rules)
 
@@ -76,7 +77,7 @@ If you already have this repo checked out:
 Org `CODEOWNERS` does not inherit. Add a root `CODEOWNERS` file:
 
 ```
-* @thebigtechplus/developers
+* @thebigtechplus/admins
 ```
 
 ### 3. Create labels

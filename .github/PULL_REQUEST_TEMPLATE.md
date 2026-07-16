@@ -27,4 +27,4 @@ Fixes #
 - [ ] I linked this pull request to an issue when applicable.
 - [ ] I added or updated tests when appropriate.
 - [ ] Existing tests pass locally with my changes.
-- [ ] I requested review from the `developers` team.
+- [ ] I requested review from the `admins` team.

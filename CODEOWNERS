@@ -1,1 +1,3 @@
-* @thebigtechplus/developers
+# Default owners for this repository.
+# Product repositories should add an equivalent CODEOWNERS file.
+* @thebigtechplus/admins

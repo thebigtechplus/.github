@@ -21,7 +21,7 @@ set -euo pipefail
 ORG="thebigtechplus"
 DEVELOPERS_TEAM="developers"
 ADMINS_TEAM="admins"
-CODEOWNERS_BODY='* @thebigtechplus/developers
+CODEOWNERS_BODY='* @thebigtechplus/admins
 '
 
 usage() {
@@ -98,7 +98,7 @@ if gh repo view "$FULL" >/dev/null 2>&1; then
   echo "→ repository exists: $FULL"
 elif [[ "$CREATE" -eq 1 ]]; then
   echo "→ creating private repository: $FULL"
-  gh repo create "$FULL" --private --default-branch main --confirm
+  gh repo create "$FULL" --private
 else
   die "repository $FULL not found. Re-run with --create, or create it first."
 fi
@@ -123,7 +123,7 @@ else
     -f content="$CONTENT_B64" >/dev/null
 fi
 
-echo "→ team access (developers: write, admins: admin)"
+echo "→ team access (developers: write, admins: admin; reviews via CODEOWNERS → admins)"
 gh api -X PUT "orgs/$ORG/teams/$DEVELOPERS_TEAM/repos/$FULL" --input - <<<'{"permission":"push"}' >/dev/null
 gh api -X PUT "orgs/$ORG/teams/$ADMINS_TEAM/repos/$FULL" --input - <<<'{"permission":"admin"}' >/dev/null
 
