@@ -1,19 +1,19 @@
 # Support
 
-## How to get help
+## Where to go
 
-| Topic | Where to go |
+| Topic | Where |
 | --- | --- |
-| Bug reports | Open a **Bug Report** issue using the repository issue forms |
-| Feature requests | Open a **Feature Request** issue using the repository issue forms |
-| Security vulnerabilities | Follow [SECURITY.md](SECURITY.md) — do not file a public issue |
-| Code of Conduct concerns | Email [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io) |
-| General product information | [www.bigtechplus.io](https://www.bigtechplus.io) |
+| Bugs and defects | Open a **Bug Report** issue in the relevant repository |
+| Feature work / improvements | Open a **Feature Request** issue in the relevant repository |
+| Security issues | Follow [SECURITY.md](SECURITY.md) — do not use a normal issue |
+| Conduct concerns | [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io) |
+| Company / product site | [www.bigtechplus.io](https://www.bigtechplus.io) |
+
+Most BigTech+ repositories are private. Use issues for tracking work inside those repositories, not as a public support channel.
 
 ## Before opening an issue
 
 1. Search existing issues for duplicates.
-2. Use the correct issue form so maintainers have the details they need.
-3. Include reproduction steps, expected behavior, and environment information for bugs.
-
-Organization defaults for issues, pull requests, and community docs live in [thebigtechplus/.github](https://github.com/thebigtechplus/.github).
+2. Use the issue form that matches the request.
+3. For bugs, include reproduction steps, expected vs actual behavior, and environment details.

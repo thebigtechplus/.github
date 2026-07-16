@@ -1,18 +1,16 @@
-# Contributing to BigTech+
+# Engineering standards
 
-Thank you for contributing. This guide applies to repositories that inherit organization defaults from [thebigtechplus/.github](https://github.com/thebigtechplus/.github).
+Standards for work in BigTech+ repositories. Repositories without their own guide inherit this file from [thebigtechplus/.github](https://github.com/thebigtechplus/.github).
 
-## Code of conduct
+## Conduct
 
-Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Report concerns to [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io).
+Follow the [Code of Conduct](CODE_OF_CONDUCT.md). Report concerns to [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io).
 
-## Getting help
+## Help and security
 
-See [SUPPORT.md](SUPPORT.md) for where to ask questions and how to report bugs or request features. Report security issues privately using [SECURITY.md](SECURITY.md).
+See [SUPPORT.md](SUPPORT.md). Report security issues using [SECURITY.md](SECURITY.md) — do not file them as normal issues.
 
 ## Branching
-
-Use a feature-branch workflow:
 
 1. Branch from `main`.
 2. Name branches `type/issue-number-brief-description` (for example, `feat/12-add-login` or `fix/34-header-alignment`).
@@ -20,7 +18,7 @@ Use a feature-branch workflow:
 
 ## Commit messages
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 | Prefix | Use |
 | --- | --- |
@@ -41,4 +39,4 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 4. Ensure required checks pass.
 5. Squash and merge after approval.
 
-Product repositories should use `@thebigtechplus/developers` in `CODEOWNERS` so the same team is requested for review by default.
+Product repositories should include a `CODEOWNERS` file that assigns `@thebigtechplus/developers` (this repository’s `CODEOWNERS` does not cascade to other repos).
