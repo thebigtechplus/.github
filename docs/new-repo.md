@@ -60,9 +60,13 @@ If you already have this repo checked out:
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
 - Root `CODEOWNERS` → `@thebigtechplus/admins`
 - Team access: `developers` (write), `admins` (admin)
-- Code review: required from `admins` via CODEOWNERS (enable enforcement in branch protection via web UI)
+- `README.md`, `AGENTS.md`, `CLAUDE.md` (from [`scripts/templates/`](../scripts/templates/) — **only if missing**)
 - Squash-only merges, delete branch on merge, wiki off
 - Branch protection: **not** applied by bootstrap — follow the printed web UI guide (or section below)
+
+`AGENTS.md` is the canonical AI guidelines file (Claude, Codex, Cursor). `CLAUDE.md` imports `@AGENTS.md` for Claude Code only — do not duplicate rules there.
+
+Templates live in [scripts/templates/](../scripts/templates/).
 
 ## Manual checklist (same steps)
 
