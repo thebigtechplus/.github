@@ -60,9 +60,9 @@ If you already have this repo checked out:
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
 - Root `CODEOWNERS` → `@thebigtechplus/admins`
 - Team access: `developers` (write), `admins` (admin)
-- Code review: required from `admins` via CODEOWNERS + branch protection
+- Code review: required from `admins` via CODEOWNERS (enable enforcement in branch protection via web UI)
 - Squash-only merges, delete branch on merge, wiki off
-- Branch protection on `main` (warns if GitHub Free limits block some rules)
+- Branch protection: **not** applied by bootstrap — follow the printed web UI guide (or section below)
 
 ## Manual checklist (same steps)
 
@@ -90,14 +90,23 @@ Org `CODEOWNERS` does not inherit. Add a root `CODEOWNERS` file:
 | `dependencies` | `#0366d6` | Dependency updates (if using Dependabot) |
 | `github-actions` | `#2088FF` | Actions-related Dependabot PRs (optional) |
 
-### 4. Branch protection on `main`
+### 4. Branch protection on `main` (manual)
+
+Bootstrap prints a link and checklist when it finishes. Configure in the repository web UI:
+
+**Settings → Rules → Rulesets** (or **Settings → Branches** for classic rules):  
+`https://github.com/thebigtechplus/<repo-name>/settings/rules`
+
+Recommended for `main`:
 
 - Require a pull request before merging
-- Require approvals: at least 1
-- Prefer requiring review from Code Owners once `CODEOWNERS` exists
-- Do not allow force pushes or deletions
+- Required approvals: at least 1
+- Require review from Code Owners (after `CODEOWNERS` exists)
+- Dismiss stale approvals when new commits are pushed
+- Require conversation resolution before merging
+- Restrict force pushes and deletions
 
-Exact options vary on GitHub Free for private repositories.
+On **GitHub Free**, branch protection for **private** org repositories may require upgrading the organization to **GitHub Team**, or making the repository **public**. Public repositories support branch protection on Free.
 
 ### 5. Optional: Dependabot
 

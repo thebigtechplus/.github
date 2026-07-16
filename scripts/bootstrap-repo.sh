@@ -152,38 +152,35 @@ EOF
 gh api -X PATCH "repos/$FULL" --input "$MERGE_JSON" >/dev/null
 rm -f "$MERGE_JSON"
 
-echo "→ branch protection on main"
-PROTECT_JSON="$(mktemp "${TMPDIR:-/tmp}/btp-protect.XXXXXX")"
-cat >"$PROTECT_JSON" <<'EOF'
-{
-  "required_status_checks": null,
-  "enforce_admins": false,
-  "required_pull_request_reviews": {
-    "dismiss_stale_reviews": true,
-    "require_code_owner_reviews": true,
-    "required_approving_review_count": 1
-  },
-  "restrictions": null,
-  "required_linear_history": true,
-  "allow_force_pushes": false,
-  "allow_deletions": false,
-  "required_conversation_resolution": true
-}
-EOF
-set +e
-PROTECT_OUT="$(gh api -X PUT "repos/$FULL/branches/main/protection" --input "$PROTECT_JSON" 2>&1)"
-PROTECT_STATUS=$?
-set -e
-rm -f "$PROTECT_JSON"
-if [[ "$PROTECT_STATUS" -ne 0 ]]; then
-  echo "warning: could not fully set branch protection (common on GitHub Free private repos)."
-  echo "         Apply what you can under Settings → Branches for $FULL."
-  echo "$PROTECT_OUT" | sed 's/^/         /' >&2
-else
-  echo "→ branch protection applied"
-fi
+print_branch_protection_guide() {
+  cat <<EOF
 
-echo
+→ branch protection: configure manually in the web UI
+  Bootstrap does not set branch protection (GitHub Free private org repos require Team).
+
+  Open: https://github.com/$FULL/settings/rules
+
+  Add a branch ruleset (or classic rule) for branch \`main\` with:
+
+  - Require a pull request before merging
+  - Required approvals: 1
+  - Require review from Code Owners (after CODEOWNERS is in place)
+  - Dismiss stale pull request approvals when new commits are pushed
+  - Require conversation resolution before merging
+  - Do not allow bypassing the above settings (optional; admins may want bypass on org .github)
+  - Restrict force pushes
+  - Restrict deletions
+
+  On GitHub Free, these options may be unavailable for private repositories until the
+  organization upgrades to GitHub Team, or the repository is public.
+
+  Docs: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+
+EOF
+}
+
+print_branch_protection_guide
+
 echo "Done: $FULL"
 echo "Inherited from org .github (if this repo has no local ISSUE_TEMPLATE): issue/PR templates + community docs."
 echo "Smoke-check: open New issue on https://github.com/$FULL/issues/new/choose"

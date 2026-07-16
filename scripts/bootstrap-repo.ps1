@@ -128,32 +128,30 @@ Write-Host "→ merge settings (squash only)"
 }
 '@ | gh api -X PATCH "repos/$Full" --input - | Out-Null
 
-Write-Host "→ branch protection on main"
-$protectJson = @'
-{
-  "required_status_checks": null,
-  "enforce_admins": false,
-  "required_pull_request_reviews": {
-    "dismiss_stale_reviews": true,
-    "require_code_owner_reviews": true,
-    "required_approving_review_count": 1
-  },
-  "restrictions": null,
-  "required_linear_history": true,
-  "allow_force_pushes": false,
-  "allow_deletions": false,
-  "required_conversation_resolution": true
+function Show-BranchProtectionGuide {
+    Write-Host ""
+    Write-Host "→ branch protection: configure manually in the web UI"
+    Write-Host "  Bootstrap does not set branch protection (GitHub Free private org repos require Team)."
+    Write-Host ""
+    Write-Host "  Open: https://github.com/$Full/settings/rules"
+    Write-Host ""
+    Write-Host "  Add a branch ruleset (or classic rule) for branch 'main' with:"
+    Write-Host ""
+    Write-Host "  - Require a pull request before merging"
+    Write-Host "  - Required approvals: 1"
+    Write-Host "  - Require review from Code Owners (after CODEOWNERS is in place)"
+    Write-Host "  - Dismiss stale pull request approvals when new commits are pushed"
+    Write-Host "  - Require conversation resolution before merging"
+    Write-Host "  - Restrict force pushes"
+    Write-Host "  - Restrict deletions"
+    Write-Host ""
+    Write-Host "  On GitHub Free, these options may be unavailable for private repositories"
+    Write-Host "  until the organization upgrades to GitHub Team, or the repository is public."
+    Write-Host ""
+    Write-Host "  Docs: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
 }
-'@
 
-$protectOut = $protectJson | gh api -X PUT "repos/$Full/branches/main/protection" --input - 2>&1
-if ($LASTEXITCODE -ne 0) {
-    Write-Warning "Could not fully set branch protection (common on GitHub Free private repos)."
-    Write-Warning "Apply what you can under Settings → Branches for $Full."
-    Write-Host $protectOut
-} else {
-    Write-Host "→ branch protection applied"
-}
+Show-BranchProtectionGuide
 
 Write-Host ""
 Write-Host "Done: $Full"
