@@ -17,10 +17,9 @@ See [docs/new-repo.md](docs/new-repo.md).
 
 BigTech+ developers use AI tools (Claude, Codex, Cursor) as assistants, not as authors of record.
 
-- Canonical guidelines: [AGENTS.md](AGENTS.md) in each product repository (seeded by bootstrap)
-- Claude Code: [CLAUDE.md](CLAUDE.md) imports `@AGENTS.md` — edit `AGENTS.md` only, not duplicate rules in `CLAUDE.md`
+- Canonical guidelines: `AGENTS.md` in each product repository, seeded from [scripts/templates/AGENTS.md](scripts/templates/AGENTS.md)
+- Claude Code: each repository's `CLAUDE.md` imports `@AGENTS.md` — edit `AGENTS.md` only, do not duplicate rules in `CLAUDE.md`
 - You are responsible for reviewing, testing, and merging all AI-assisted changes
-- Do not add AI co-author trailers to commits
 
 ## Conduct
 
