@@ -75,3 +75,7 @@ Add language-specific hooks in the repository when needed. Do not bypass hooks w
 5. Squash and merge after approval.
 
 Product repositories should include a `CODEOWNERS` file that assigns `@thebigtechplus/admins` (this repository’s `CODEOWNERS` does not cascade to other repos).
+
+## License
+
+New repositories get a proprietary `LICENSE` (all rights reserved) from bootstrap by default. Replace it only when a repository is intentionally open source.

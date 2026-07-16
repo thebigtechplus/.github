@@ -24,3 +24,7 @@ This repository follows BigTech+ engineering standards inherited from [thebigtec
 - [CONTRIBUTING.md](CONTRIBUTING.md) — branching, commits, reviews
 - [SECURITY.md](SECURITY.md) — security reporting
 - [AGENTS.md](AGENTS.md) — AI-assisted development (Claude Code reads this via [CLAUDE.md](CLAUDE.md))
+
+## License
+
+Proprietary. See [LICENSE](LICENSE). All rights reserved unless a separate written agreement says otherwise.

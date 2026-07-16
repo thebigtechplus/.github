@@ -24,7 +24,7 @@ Copy these into each product repository (or configure there) when needed:
 | Path | Purpose |
 | --- | --- |
 | [`CODEOWNERS`](CODEOWNERS) | Review ownership (`@thebigtechplus/admins`) |
-| [`scripts/templates/`](scripts/templates/) | README, AGENTS, CLAUDE, pre-commit templates for bootstrap |
+| [`scripts/templates/`](scripts/templates/) | README, AGENTS, CLAUDE, proprietary LICENSE, pre-commit templates for bootstrap |
 | [`.github/dependabot.yml`](.github/dependabot.yml) | Dependency update automation |
 | Workflows under `.github/workflows/` | CI/CD (add real workflows when products need them) |
 
