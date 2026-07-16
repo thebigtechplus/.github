@@ -166,26 +166,7 @@ gh label create dependencies --repo $Full --color 0366d6 --description "Dependen
 gh label create github-actions --repo $Full --color 2088FF --description "GitHub Actions related" --force | Out-Null
 
 Write-Host "→ ensuring CODEOWNERS"
-$bytes = [System.Text.Encoding]::UTF8.GetBytes($CodeownersBody)
-$contentB64 = [Convert]::ToBase64String($bytes)
-
-$sha = $null
-try {
-    $sha = gh api "repos/$Full/contents/CODEOWNERS" --jq .sha 2>$null
-} catch {
-    $sha = $null
-}
-
-if ($sha) {
-    gh api -X PUT "repos/$Full/contents/CODEOWNERS" `
-        -f message="chore: update CODEOWNERS" `
-        -f content="$contentB64" `
-        -f sha="$sha" | Out-Null
-} else {
-    gh api -X PUT "repos/$Full/contents/CODEOWNERS" `
-        -f message="chore: add CODEOWNERS" `
-        -f content="$contentB64" | Out-Null
-}
+Ensure-RepoFileIfMissing -Path "CODEOWNERS" -Content $CodeownersBody -Message "chore: add CODEOWNERS"
 
 Write-Host "→ team access (developers: write, admins: admin; reviews via CODEOWNERS → admins)"
 '{"permission":"push"}' | gh api -X PUT "orgs/$Org/teams/$DevelopersTeam/repos/$Full" --input - | Out-Null

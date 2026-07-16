@@ -58,7 +58,7 @@ If you already have this repo checked out:
 ## What bootstrap configures
 
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
-- Root `CODEOWNERS` → `@thebigtechplus/admins`
+- Root `CODEOWNERS` → `@thebigtechplus/admins` (**only if missing**)
 - Team access: `developers` (write), `admins` (admin)
 - `README.md`, `AGENTS.md`, `CLAUDE.md` (from [`scripts/templates/`](../scripts/templates/) — **only if missing**)
 - `LICENSE` — proprietary / all rights reserved (from templates — **only if missing**; replace only for intentional open source)
@@ -91,7 +91,7 @@ Templates live in [scripts/templates/](../scripts/templates/).
 
 Org `CODEOWNERS` does not inherit. Add a root `CODEOWNERS` file:
 
-```
+```text
 * @thebigtechplus/admins
 ```
 
@@ -108,7 +108,7 @@ Org `CODEOWNERS` does not inherit. Add a root `CODEOWNERS` file:
 
 Bootstrap prints a link and checklist when it finishes. Configure in the repository web UI:
 
-**Settings → Rules → Rulesets** (or **Settings → Branches** for classic rules):  
+**Settings → Rules → Rulesets** (or **Settings → Branches** for classic rules):
 `https://github.com/thebigtechplus/<repo-name>/settings/rules`
 
 Recommended for `main`:

@@ -35,11 +35,15 @@ b64_decode() {
 
 fetch_template() {
   local name="$1"
-  local script_dir
-  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  if [[ -f "$script_dir/templates/$name" ]]; then
-    cat "$script_dir/templates/$name"
-    return
+  # BASH_SOURCE is unset when the script is piped (curl | bash); fall back to the API fetch.
+  local src="${BASH_SOURCE[0]:-}"
+  if [[ -n "$src" ]]; then
+    local script_dir
+    script_dir="$(cd "$(dirname "$src")" && pwd)"
+    if [[ -f "$script_dir/templates/$name" ]]; then
+      cat "$script_dir/templates/$name"
+      return
+    fi
   fi
   gh api "repos/${TEMPLATE_REPO}/contents/scripts/templates/${name}" --jq .content | tr -d '\n' | b64_decode
 }
@@ -48,6 +52,10 @@ ensure_repo_file_if_missing() {
   local path="$1"
   local content="$2"
   local message="$3"
+
+  # Command substitution strips the final newline; restore it so seeded
+  # files pass the end-of-file-fixer pre-commit hook.
+  [[ "$content" == *$'\n' ]] || content+=$'\n'
 
   if gh api "repos/$FULL/contents/$path" --jq .sha >/dev/null 2>&1; then
     echo "  skipped ($path exists)"
@@ -205,18 +213,7 @@ gh label create dependencies --repo "$FULL" --color 0366d6 --description "Depend
 gh label create github-actions --repo "$FULL" --color 2088FF --description "GitHub Actions related" --force >/dev/null
 
 echo "→ ensuring CODEOWNERS"
-CONTENT_B64="$(b64_encode "$CODEOWNERS_BODY")"
-SHA="$(gh api "repos/$FULL/contents/CODEOWNERS" --jq .sha 2>/dev/null || true)"
-if [[ -n "$SHA" ]]; then
-  gh api -X PUT "repos/$FULL/contents/CODEOWNERS" \
-    -f message="chore: update CODEOWNERS" \
-    -f content="$CONTENT_B64" \
-    -f sha="$SHA" >/dev/null
-else
-  gh api -X PUT "repos/$FULL/contents/CODEOWNERS" \
-    -f message="chore: add CODEOWNERS" \
-    -f content="$CONTENT_B64" >/dev/null
-fi
+ensure_repo_file_if_missing "CODEOWNERS" "$CODEOWNERS_BODY" "chore: add CODEOWNERS"
 
 echo "→ team access (developers: write, admins: admin; reviews via CODEOWNERS → admins)"
 gh api -X PUT "orgs/$ORG/teams/$DEVELOPERS_TEAM/repos/$FULL" --input - <<<'{"permission":"push"}' >/dev/null

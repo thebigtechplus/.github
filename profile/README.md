@@ -1,7 +1,7 @@
 # BigTech+
 
-Building BIG softwares.
+Building BIG software.
 
-### Links
+## Links
 
 - Website: [www.bigtechplus.io](https://www.bigtechplus.io)

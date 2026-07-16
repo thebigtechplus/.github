@@ -1,2 +1,2 @@
-<!-- Do not edit. AI guidelines live in AGENTS.md (shared across tools). -->
+<!-- Claude Code entry point. Do not add rules here — edit AGENTS.md (shared by all AI tools). -->
 @AGENTS.md
