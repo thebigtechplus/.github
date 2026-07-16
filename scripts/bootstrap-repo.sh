@@ -6,8 +6,15 @@
 #   ./scripts/bootstrap-repo.sh <repo-name>
 #   ./scripts/bootstrap-repo.sh <repo-name> --create
 #
-# Requires: gh (authenticated), network
+# Requires: GitHub CLI (gh), authenticated — required for all BigTech+ developers
 # Platforms: macOS, Linux, Windows (Git Bash or WSL)
+#
+# Prefer from anywhere:
+#   gh extension install thebigtechplus/gh-bootstrap-repo
+#   gh bootstrap-repo <repo-name> [--create]
+#
+# Or:
+#   curl -fsSL https://raw.githubusercontent.com/thebigtechplus/.github/main/scripts/bootstrap-repo.sh | bash -s -- <repo-name> [--create]
 
 set -euo pipefail
 
@@ -121,7 +128,8 @@ gh api -X PUT "orgs/$ORG/teams/$DEVELOPERS_TEAM/repos/$FULL" --input - <<<'{"per
 gh api -X PUT "orgs/$ORG/teams/$ADMINS_TEAM/repos/$FULL" --input - <<<'{"permission":"admin"}' >/dev/null
 
 echo "→ merge settings (squash only)"
-gh api -X PATCH "repos/$FULL" --input - <<'EOF' >/dev/null
+MERGE_JSON="$(mktemp "${TMPDIR:-/tmp}/btp-merge.XXXXXX")"
+cat >"$MERGE_JSON" <<'EOF'
 {
   "allow_squash_merge": true,
   "allow_merge_commit": false,
@@ -130,12 +138,32 @@ gh api -X PATCH "repos/$FULL" --input - <<'EOF' >/dev/null
   "has_wiki": false
 }
 EOF
+gh api -X PATCH "repos/$FULL" --input "$MERGE_JSON" >/dev/null
+rm -f "$MERGE_JSON"
 
 echo "→ branch protection on main"
+PROTECT_JSON="$(mktemp "${TMPDIR:-/tmp}/btp-protect.XXXXXX")"
+cat >"$PROTECT_JSON" <<'EOF'
+{
+  "required_status_checks": null,
+  "enforce_admins": false,
+  "required_pull_request_reviews": {
+    "dismiss_stale_reviews": true,
+    "require_code_owner_reviews": true,
+    "required_approving_review_count": 1
+  },
+  "restrictions": null,
+  "required_linear_history": true,
+  "allow_force_pushes": false,
+  "allow_deletions": false,
+  "required_conversation_resolution": true
+}
+EOF
 set +e
-PROTECT_OUT="$(gh api -X PUT "repos/$FULL/branches/main/protection" --input - <<'EOF' 2>&1)"
+PROTECT_OUT="$(gh api -X PUT "repos/$FULL/branches/main/protection" --input "$PROTECT_JSON" 2>&1)"
 PROTECT_STATUS=$?
 set -e
+rm -f "$PROTECT_JSON"
 if [[ "$PROTECT_STATUS" -ne 0 ]]; then
   echo "warning: could not fully set branch protection (common on GitHub Free private repos)."
   echo "         Apply what you can under Settings → Branches for $FULL."

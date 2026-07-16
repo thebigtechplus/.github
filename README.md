@@ -31,17 +31,21 @@ Issue form labels (`bug`, `enhancement`) must also exist in each repository that
 
 ## New repositories
 
-Bootstrap **one repo at a time** (not all repos automatically):
+**Requires [GitHub CLI](https://cli.github.com/)** (`gh`). Bootstrap **one repo at a time** (not all repos automatically).
+
+Install the extension once:
 
 ```bash
-./scripts/bootstrap-repo.sh <repo-name> --create
+gh extension install thebigtechplus/gh-bootstrap-repo
 ```
 
-```powershell
-pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create
+Then from anywhere:
+
+```bash
+gh bootstrap-repo <repo-name> --create
 ```
 
-Details: [`docs/new-repo.md`](docs/new-repo.md).
+One-liners and details: [`docs/new-repo.md`](docs/new-repo.md).
 
 ## Profile
 

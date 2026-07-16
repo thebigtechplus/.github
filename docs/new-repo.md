@@ -1,42 +1,66 @@
 # New repository checklist
 
-Use this when creating a private product repository under `thebigtechplus`.
+**Requires [GitHub CLI](https://cli.github.com/)** (`gh`), authenticated with access to `thebigtechplus`. All developers use `gh` for this workflow.
 
 Organization defaults (issue/PR templates, `CONTRIBUTING`, `SECURITY`, `SUPPORT`, `CODE_OF_CONDUCT`) inherit from [thebigtechplus/.github](https://github.com/thebigtechplus/.github) when the new repo does not define its own copies. Keep this `.github` repository **public**.
 
-## Automated bootstrap (recommended)
+## Recommended: `gh` extension (from anywhere)
 
-The bootstrap script configures **one repository per run**. It does **not** apply to all repos automatically, and it does **not** run for future repos unless you invoke it again.
+Install once:
+
+```bash
+gh extension install thebigtechplus/gh-bootstrap-repo
+```
+
+Then, from any directory, bootstrap **one** repository at a time:
+
+```bash
+gh bootstrap-repo api --create   # create private repo + configure
+gh bootstrap-repo web            # configure existing repo
+```
+
+Upgrade the extension:
+
+```bash
+gh extension upgrade bootstrap-repo
+```
+
+This does **not** apply to all repos automatically. Run it again for each new repository.
+
+Extension source: [thebigtechplus/gh-bootstrap-repo](https://github.com/thebigtechplus/gh-bootstrap-repo).
+
+## Alternative: one-liners (still requires `gh`)
+
+The remote scripts call `gh` internally. Install and authenticate `gh` first.
+
+```bash
+# macOS / Linux / Git Bash / WSL
+curl -fsSL https://raw.githubusercontent.com/thebigtechplus/.github/main/scripts/bootstrap-repo.sh | bash -s -- api --create
+```
+
+```powershell
+# Windows PowerShell
+$script = Join-Path $env:TEMP 'btp-bootstrap-repo.ps1'
+Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/thebigtechplus/.github/main/scripts/bootstrap-repo.ps1' -OutFile $script
+pwsh -File $script api -Create
+```
+
+## Local clone (optional)
+
+If you already have this repo checked out:
 
 | Platform | Command |
 | --- | --- |
 | macOS / Linux / Git Bash / WSL | `./scripts/bootstrap-repo.sh <repo-name> --create` |
 | Windows (PowerShell) | `pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create` |
 
-Examples:
-
-```bash
-# Create private repo "api" and configure it
-./scripts/bootstrap-repo.sh api --create
-
-# Configure an existing repo "web"
-./scripts/bootstrap-repo.sh web
-```
-
-```powershell
-pwsh ./scripts/bootstrap-repo.ps1 api -Create
-pwsh ./scripts/bootstrap-repo.ps1 web
-```
-
-What the script sets on that repo:
+## What bootstrap configures
 
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
 - Root `CODEOWNERS` → `@thebigtechplus/developers`
 - Team access: `developers` (write), `admins` (admin)
 - Squash-only merges, delete branch on merge, wiki off
 - Branch protection on `main` (warns if GitHub Free limits block some rules)
-
-Requirements: [GitHub CLI](https://cli.github.com/) installed and `gh auth login` completed.
 
 ## Manual checklist (same steps)
 

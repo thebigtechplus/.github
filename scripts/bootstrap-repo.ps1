@@ -5,8 +5,15 @@
 #   pwsh ./scripts/bootstrap-repo.ps1 <repo-name>
 #   pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create
 #
-# Requires: gh (authenticated), PowerShell 5+ or PowerShell 7+
-# Platforms: Windows, macOS, Linux (pwsh)
+# Requires: GitHub CLI (gh), authenticated — required for all BigTech+ developers
+# Platforms: Windows (PowerShell 5+ / pwsh), also works on macOS/Linux with pwsh
+#
+# Prefer from anywhere:
+#   gh extension install thebigtechplus/gh-bootstrap-repo
+#   gh bootstrap-repo <repo-name> [--create]
+#
+# Or download then run:
+#   Invoke-RestMethod ... -OutFile bootstrap.ps1; pwsh -File bootstrap.ps1 <repo> -Create
 
 [CmdletBinding()]
 param(

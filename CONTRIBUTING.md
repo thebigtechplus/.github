@@ -2,6 +2,17 @@
 
 Standards for work in BigTech+ repositories. Repositories without their own guide inherit this file from [thebigtechplus/.github](https://github.com/thebigtechplus/.github).
 
+## Tooling
+
+Install and authenticate the [GitHub CLI](https://cli.github.com/) (`gh`). All developers use `gh` for repository bootstrap and common GitHub workflows.
+
+```bash
+gh extension install thebigtechplus/gh-bootstrap-repo
+gh bootstrap-repo <repo-name> --create
+```
+
+See [docs/new-repo.md](docs/new-repo.md).
+
 ## Conduct
 
 Follow the [Code of Conduct](CODE_OF_CONDUCT.md). Report concerns to [conduct@bigtechplus.io](mailto:conduct@bigtechplus.io).
