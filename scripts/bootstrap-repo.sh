@@ -35,11 +35,15 @@ b64_decode() {
 
 fetch_template() {
   local name="$1"
-  local script_dir
-  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  if [[ -f "$script_dir/templates/$name" ]]; then
-    cat "$script_dir/templates/$name"
-    return
+  # BASH_SOURCE is unset when the script is piped (curl | bash); fall back to the API fetch.
+  local src="${BASH_SOURCE[0]:-}"
+  if [[ -n "$src" ]]; then
+    local script_dir
+    script_dir="$(cd "$(dirname "$src")" && pwd)"
+    if [[ -f "$script_dir/templates/$name" ]]; then
+      cat "$script_dir/templates/$name"
+      return
+    fi
   fi
   gh api "repos/${TEMPLATE_REPO}/contents/scripts/templates/${name}" --jq .content | tr -d '\n' | b64_decode
 }
