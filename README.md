@@ -29,6 +29,10 @@ Copy these into each product repository (or configure there) when needed:
 
 Issue form labels (`bug`, `enhancement`) must also exist in each repository that uses the inherited forms.
 
+## New repositories
+
+When creating a private product repo, follow [`docs/new-repo.md`](docs/new-repo.md) (CODEOWNERS, labels, branch protection, optional Dependabot/CI).
+
 ## Profile
 
 [`profile/README.md`](profile/README.md) is shown on [github.com/thebigtechplus](https://github.com/thebigtechplus).
