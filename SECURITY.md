@@ -1,12 +1,18 @@
 # Security Policy
 
-## Reporting a Vulnerability
-Security is a top priority for BigTech+. 
+## Supported versions
 
-If you discover a security vulnerability within any of our repositories, please **do not** open a public issue. Instead, please report it privately.
+Security updates apply to the latest release of each actively maintained BigTech+ repository unless that repository documents otherwise.
 
-**How to report:**
-1. Email us directly at: security@bigtechplus.io
-2. Alternatively, use GitHub's private vulnerability reporting feature if enabled on the specific repository.
+## Reporting a vulnerability
 
-We will acknowledge your report within 48 hours and provide a timeline for the fix.
+Do not open a public issue for security vulnerabilities.
+
+Report privately using one of these methods:
+
+1. Email [security@bigtechplus.io](mailto:security@bigtechplus.io)
+2. GitHub private vulnerability reporting, when enabled on the repository
+
+Include enough detail for us to reproduce and assess the issue (affected repository, version or commit, steps to reproduce, and impact).
+
+We acknowledge reports within 48 hours and follow up with a remediation timeline. Please give us reasonable time to address the issue before any public disclosure.
