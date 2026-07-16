@@ -58,7 +58,7 @@ If you already have this repo checked out:
 ## What bootstrap configures
 
 - Labels: `bug`, `enhancement`, `dependencies`, `github-actions`
-- Root `CODEOWNERS` → `@thebigtechplus/admins`
+- Root `CODEOWNERS` → `@thebigtechplus/admins` (**only if missing**)
 - Team access: `developers` (write), `admins` (admin)
 - `README.md`, `AGENTS.md`, `CLAUDE.md` (from [`scripts/templates/`](../scripts/templates/) — **only if missing**)
 - `LICENSE` — proprietary / all rights reserved (from templates — **only if missing**; replace only for intentional open source)

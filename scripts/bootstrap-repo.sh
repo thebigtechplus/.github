@@ -213,18 +213,7 @@ gh label create dependencies --repo "$FULL" --color 0366d6 --description "Depend
 gh label create github-actions --repo "$FULL" --color 2088FF --description "GitHub Actions related" --force >/dev/null
 
 echo "→ ensuring CODEOWNERS"
-CONTENT_B64="$(b64_encode "$CODEOWNERS_BODY")"
-SHA="$(gh api "repos/$FULL/contents/CODEOWNERS" --jq .sha 2>/dev/null || true)"
-if [[ -n "$SHA" ]]; then
-  gh api -X PUT "repos/$FULL/contents/CODEOWNERS" \
-    -f message="chore: update CODEOWNERS" \
-    -f content="$CONTENT_B64" \
-    -f sha="$SHA" >/dev/null
-else
-  gh api -X PUT "repos/$FULL/contents/CODEOWNERS" \
-    -f message="chore: add CODEOWNERS" \
-    -f content="$CONTENT_B64" >/dev/null
-fi
+ensure_repo_file_if_missing "CODEOWNERS" "$CODEOWNERS_BODY" "chore: add CODEOWNERS"
 
 echo "→ team access (developers: write, admins: admin; reviews via CODEOWNERS → admins)"
 gh api -X PUT "orgs/$ORG/teams/$DEVELOPERS_TEAM/repos/$FULL" --input - <<<'{"permission":"push"}' >/dev/null
