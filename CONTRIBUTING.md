@@ -71,9 +71,22 @@ Add language-specific hooks in the repository when needed. Do not bypass hooks w
 2. Complete the pull request template.
 3. Request review from at least one member of the [`admins`](https://github.com/orgs/thebigtechplus/teams/admins) team.
 4. Ensure required checks pass.
-5. Squash and merge after approval.
+5. Merge following the [merging guidelines](#merging) below.
 
 Product repositories should include a `CODEOWNERS` file that assigns `@thebigtechplus/admins` (this repository’s `CODEOWNERS` does not cascade to other repos).
+
+## Merging
+
+- **Squash and merge only.** Merge commits and rebase merges are disabled by bootstrap.
+- **The pull request title becomes the commit on `main`**, so PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/) (for example, `feat: add login flow`). Clean up the squash commit body before confirming the merge — keep it a short summary, not a list of intermediate commits.
+- **Merge only when all of these hold:**
+  1. At least one approval from the [`admins`](https://github.com/orgs/thebigtechplus/teams/admins) team.
+  2. All required checks are green.
+  3. All review conversations are resolved.
+- **The author merges** after approval. Admins may merge on the author's behalf for abandoned or time-sensitive PRs.
+- **Do not merge your own PR without review.** If you are the only maintainer of a repository, wait for review when the change is risky; use your judgment for trivial changes (docs, typos) and say so in the PR.
+- Branches are deleted automatically on merge. Do not reuse a merged branch — start a new one from `main`.
+- Keep pull requests small and focused. Split large work into a sequence of PRs that each merge cleanly on their own.
 
 ## License
 
