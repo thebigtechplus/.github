@@ -22,7 +22,7 @@ Fixes #
 
 ## Checklist
 
-- [ ] I followed the [contributing guidelines](https://github.com/thebigtechplus/.github/blob/main/CONTRIBUTING.md).
+- [ ] I followed the [engineering standards](https://github.com/thebigtechplus/.github/blob/main/CONTRIBUTING.md).
 - [ ] I completed a self-review of my changes.
 - [ ] I linked this pull request to an issue when applicable.
 - [ ] I added or updated tests when appropriate.
