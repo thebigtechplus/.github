@@ -1,15 +1,30 @@
-## Description
-## Related Issue
+## Summary
+
+<!-- What does this pull request change, and why? -->
+
+## Related issue
+
 Fixes #
 
-## Type of Change
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+## Type of change
+
+- [ ] Bug fix (non-breaking)
+- [ ] New feature (non-breaking)
+- [ ] Breaking change
 - [ ] Documentation update
+- [ ] Chore / tooling
+
+## Test plan
+
+<!-- How did you verify this change? -->
+
+-
 
 ## Checklist
-- [ ] My code follows the style guidelines of this project.
-- [ ] I have performed a self-review of my own code.
-- [ ] I have added tests that prove my fix is effective or that my feature works.
-- [ ] New and existing unit tests pass locally with my changes.
+
+- [ ] I followed the [contributing guidelines](https://github.com/thebigtechplus/.github/blob/main/CONTRIBUTING.md).
+- [ ] I completed a self-review of my changes.
+- [ ] I linked this pull request to an issue when applicable.
+- [ ] I added or updated tests when appropriate.
+- [ ] Existing tests pass locally with my changes.
+- [ ] I requested review from the `developers` team.
