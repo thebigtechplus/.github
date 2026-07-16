@@ -52,6 +52,20 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 | `chore:` | Maintenance, tooling, or configuration |
 | `ci:` | Continuous integration |
 
+## Pre-commit
+
+Product repositories seeded by bootstrap include `.pre-commit-config.yaml`. Install hooks once per clone:
+
+```bash
+pip install pre-commit   # or: brew install pre-commit
+pre-commit install
+pre-commit run --all-files   # optional first run
+```
+
+Hooks include: whitespace and EOF fixes, YAML checks, merge conflicts, large files, private keys, [Conventional Commits](https://www.conventionalcommits.org/) (commitizen), shellcheck, markdownlint, and gitleaks.
+
+Add language-specific hooks in the repository when needed. Do not bypass hooks with `--no-verify` without a documented reason.
+
 ## Pull requests
 
 1. Link the pull request to an issue when one exists.

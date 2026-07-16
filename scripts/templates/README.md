@@ -10,6 +10,13 @@
 
 <!-- How to set up, build, test, and run locally. -->
 
+After cloning:
+
+```bash
+pip install pre-commit   # or: brew install pre-commit
+pre-commit install
+```
+
 ## Standards
 
 This repository follows BigTech+ engineering standards inherited from [thebigtechplus/.github](https://github.com/thebigtechplus/.github) unless noted otherwise:

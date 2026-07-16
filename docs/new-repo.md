@@ -61,10 +61,19 @@ If you already have this repo checked out:
 - Root `CODEOWNERS` → `@thebigtechplus/admins`
 - Team access: `developers` (write), `admins` (admin)
 - `README.md`, `AGENTS.md`, `CLAUDE.md` (from [`scripts/templates/`](../scripts/templates/) — **only if missing**)
+- `.pre-commit-config.yaml`, `.markdownlint.yaml` (from templates — **only if missing**)
 - Squash-only merges, delete branch on merge, wiki off
 - Branch protection: **not** applied by bootstrap — follow the printed web UI guide (or section below)
 
 `AGENTS.md` is the canonical AI guidelines file (Claude, Codex, Cursor). `CLAUDE.md` imports `@AGENTS.md` for Claude Code only — do not duplicate rules there.
+
+After bootstrap, install pre-commit locally:
+
+```bash
+pip install pre-commit
+pre-commit install
+pre-commit run --all-files
+```
 
 Templates live in [scripts/templates/](../scripts/templates/).
 

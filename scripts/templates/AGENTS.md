@@ -24,6 +24,7 @@ Guidelines for using AI coding tools at BigTech+.
 
 - Do not add AI co-author trailers to commits (for example, `Co-authored-by` lines for tools).
 - Write commit messages yourself using [Conventional Commits](https://www.conventionalcommits.org/).
+- Run `pre-commit run --all-files` before pushing when hooks are installed. Do not use `git commit --no-verify` to skip checks without a documented reason.
 
 ## Pull requests
 
