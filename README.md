@@ -14,8 +14,8 @@ Repositories in the organization that do not define their own copies inherit the
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting policy |
 | [`SUPPORT.md`](SUPPORT.md) | Where to get help |
 | [`CODEOWNERS`](CODEOWNERS) | Default review ownership for this repository |
-| [`ISSUE_TEMPLATE/`](ISSUE_TEMPLATE/) | Bug report and feature request forms |
-| [`PULL_REQUEST_TEMPLATE.md`](PULL_REQUEST_TEMPLATE.md) | Default pull request checklist |
+| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug report and feature request forms |
+| [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) | Default pull request checklist |
 | [`.github/workflows/`](.github/workflows/) | Reusable workflows for other repositories |
 | [`.github/dependabot.yml`](.github/dependabot.yml) | Dependabot updates for GitHub Actions in this repository |
 
