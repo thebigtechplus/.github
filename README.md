@@ -42,7 +42,8 @@ gh extension install thebigtechplus/gh-bootstrap-repo
 Then from anywhere:
 
 ```bash
-gh bootstrap-repo <repo-name> --create
+gh bootstrap-repo <repo-name> --create              # private (default)
+gh bootstrap-repo <repo-name> --create --public     # public
 ```
 
 One-liners and details: [`docs/new-repo.md`](docs/new-repo.md).

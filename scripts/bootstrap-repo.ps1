@@ -10,7 +10,7 @@
 #
 # Prefer from anywhere:
 #   gh extension install thebigtechplus/gh-bootstrap-repo
-#   gh bootstrap-repo <repo-name> [--create]
+#   gh bootstrap-repo <repo-name> [-Create] [-Public]
 #
 # Or download then run:
 #   Invoke-RestMethod ... -OutFile bootstrap.ps1; pwsh -File bootstrap.ps1 <repo> -Create
@@ -21,6 +21,7 @@ param(
     [string]$Repo,
 
     [switch]$Create,
+    [switch]$Public,
     [switch]$Help
 )
 
@@ -33,10 +34,11 @@ $CodeownersBody = "* @thebigtechplus/admins`n"
 
 function Show-Usage {
     @"
-Usage: bootstrap-repo.ps1 <repo-name> [-Create]
+Usage: bootstrap-repo.ps1 <repo-name> [-Create] [-Public]
 
   <repo-name>   Repository name only (not owner/name). Example: api
-  -Create       Create a private repo under thebigtechplus if it does not exist
+  -Create       Create the repo under thebigtechplus if it does not exist (private by default)
+  -Public       With -Create, create a public repo instead of private
 
 This configures ONE repository. It does not cascade to other or future repos.
 "@
@@ -50,6 +52,10 @@ if ($Help -or [string]::IsNullOrWhiteSpace($Repo)) {
 
 if ($Repo -match "/") {
     throw "Pass the repo name only (got '$Repo'). Example: api"
+}
+
+if ($Public -and -not $Create) {
+    throw "-Public requires -Create"
 }
 
 if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
@@ -67,8 +73,13 @@ gh repo view $Full 2>$null | Out-Null
 if ($LASTEXITCODE -eq 0) {
     Write-Host "→ repository exists: $Full"
 } elseif ($Create) {
-    Write-Host "→ creating private repository: $Full"
-    gh repo create $Full --private
+    if ($Public) {
+        Write-Host "→ creating public repository: $Full"
+        gh repo create $Full --public
+    } else {
+        Write-Host "→ creating private repository: $Full"
+        gh repo create $Full --private
+    }
     if ($LASTEXITCODE -ne 0) { throw "failed to create $Full" }
 } else {
     throw "repository $Full not found. Re-run with -Create, or create it first."

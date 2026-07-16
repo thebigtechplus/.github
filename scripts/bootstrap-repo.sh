@@ -11,7 +11,7 @@
 #
 # Prefer from anywhere:
 #   gh extension install thebigtechplus/gh-bootstrap-repo
-#   gh bootstrap-repo <repo-name> [--create]
+#   gh bootstrap-repo <repo-name> [--create] [--public]
 #
 # Or:
 #   curl -fsSL https://raw.githubusercontent.com/thebigtechplus/.github/main/scripts/bootstrap-repo.sh | bash -s -- <repo-name> [--create]
@@ -26,16 +26,17 @@ CODEOWNERS_BODY='* @thebigtechplus/admins
 
 usage() {
   cat <<'EOF'
-Usage: bootstrap-repo.sh <repo-name> [--create]
+Usage: bootstrap-repo.sh <repo-name> [--create] [--public]
 
   <repo-name>   Repository name only (not owner/name). Example: api
-  --create      Create a private repo under thebigtechplus if it does not exist
+  --create      Create the repo under thebigtechplus if it does not exist (private by default)
+  --public      With --create, create a public repo instead of private
 
 This configures ONE repository. It does not cascade to other or future repos.
 To bootstrap several repos:
 
   ./scripts/bootstrap-repo.sh api --create
-  ./scripts/bootstrap-repo.sh web --create
+  ./scripts/bootstrap-repo.sh oss-demo --create --public
 
 Windows: run from Git Bash or WSL (or use scripts/bootstrap-repo.ps1).
 EOF
@@ -65,6 +66,7 @@ need_gh() {
 
 REPO=""
 CREATE=0
+PUBLIC=0
 
 for arg in "$@"; do
   case "$arg" in
@@ -74,6 +76,9 @@ for arg in "$@"; do
       ;;
     --create)
       CREATE=1
+      ;;
+    --public)
+      PUBLIC=1
       ;;
     -*)
       die "unknown option: $arg"
@@ -89,6 +94,7 @@ done
 
 [[ -n "$REPO" ]] || { usage >&2; exit 1; }
 [[ "$REPO" != */* ]] || die "pass the repo name only (got '$REPO'). Example: api"
+[[ "$PUBLIC" -eq 0 || "$CREATE" -eq 1 ]] || die "--public requires --create"
 
 need_gh
 
@@ -97,8 +103,13 @@ FULL="$ORG/$REPO"
 if gh repo view "$FULL" >/dev/null 2>&1; then
   echo "→ repository exists: $FULL"
 elif [[ "$CREATE" -eq 1 ]]; then
-  echo "→ creating private repository: $FULL"
-  gh repo create "$FULL" --private
+  if [[ "$PUBLIC" -eq 1 ]]; then
+    echo "→ creating public repository: $FULL"
+    gh repo create "$FULL" --public
+  else
+    echo "→ creating private repository: $FULL"
+    gh repo create "$FULL" --private
+  fi
 else
   die "repository $FULL not found. Re-run with --create, or create it first."
 fi

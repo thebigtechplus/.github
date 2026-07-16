@@ -15,8 +15,9 @@ gh extension install thebigtechplus/gh-bootstrap-repo
 Then, from any directory, bootstrap **one** repository at a time:
 
 ```bash
-gh bootstrap-repo api --create   # create private repo + configure
-gh bootstrap-repo web            # configure existing repo
+gh bootstrap-repo api --create              # private (default)
+gh bootstrap-repo oss-demo --create --public
+gh bootstrap-repo web                       # configure existing repo
 ```
 
 Upgrade the extension:
