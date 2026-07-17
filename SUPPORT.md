@@ -1,3 +1,5 @@
+> မြန်မာဘာသာဖြင့် ဖတ်ရန် — [SUPPORT.my.md](SUPPORT.my.md)
+
 # Support
 
 ## Where to go

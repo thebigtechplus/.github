@@ -1,3 +1,5 @@
+> မြန်မာဘာသာဖြင့် ဖတ်ရန် — [CODE_OF_CONDUCT.my.md](CODE_OF_CONDUCT.my.md)
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
