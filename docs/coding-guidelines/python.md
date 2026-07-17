@@ -102,8 +102,9 @@ Anti-patterns: mutable default arguments, `from x import *`, god modules, import
 
 API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
 
-- [FastAPI](https://fastapi.tiangolo.com/) is the default service framework; pydantic models validate all request/response bodies.
-- Routers stay thin: validate → call service → return model. No business logic in route functions.
+- [FastAPI](https://fastapi.tiangolo.com/) is the default for APIs and lightweight services; pydantic models validate all request/response bodies.
+- [Django](https://www.djangoproject.com/) (with [Django REST Framework](https://www.django-rest-framework.org/) for APIs) for full-featured web applications — admin, ORM, auth, and batteries included. Follow Django's app structure: one app per domain feature, fat models/services, thin views.
+- Routers/views stay thin: validate → call service → return model. No business logic in route functions.
 - JSON fields `camelCase` via model aliases; time is RFC 3339 UTC.
 
 ## Logging, config, and secrets
