@@ -83,6 +83,8 @@ Anti-patterns: interface bloat (an interface with one implementation and no cons
 
 ## APIs and services
 
+API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+
 - Standard library `net/http` first; add a router (e.g. `chi`) when routing outgrows it.
 - Handlers decode/validate input, call a service, encode output — no business logic in handlers.
 - JSON fields are `camelCase` via struct tags; time is RFC 3339 UTC.

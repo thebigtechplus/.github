@@ -79,6 +79,8 @@ Anti-patterns: `clone()` to silence the borrow checker, `Arc<Mutex<_>>` as the d
 
 ## APIs and services
 
+API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+
 - [axum](https://docs.rs/axum) is the default web framework; extractors validate input at the boundary (serde + validation), handlers stay thin.
 - JSON fields `camelCase` via `#[serde(rename_all = "camelCase")]`; time is RFC 3339 UTC (`chrono`/`time` with serde).
 - Servers support graceful shutdown (signal → drain connections → stop).

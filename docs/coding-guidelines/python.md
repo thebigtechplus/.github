@@ -100,6 +100,8 @@ Anti-patterns: mutable default arguments, `from x import *`, god modules, import
 
 ## APIs and services
 
+API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+
 - [FastAPI](https://fastapi.tiangolo.com/) is the default service framework; pydantic models validate all request/response bodies.
 - Routers stay thin: validate → call service → return model. No business logic in route functions.
 - JSON fields `camelCase` via model aliases; time is RFC 3339 UTC.

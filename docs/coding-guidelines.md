@@ -13,6 +13,16 @@ Primary languages are **Go, Python, TypeScript, and Rust** (see [CONTRIBUTING.md
 | TypeScript | [coding-guidelines/typescript.md](coding-guidelines/typescript.md) | Biome |
 | Rust | [coding-guidelines/rust.md](coding-guidelines/rust.md) | rustfmt, clippy |
 
+## Shared guides
+
+| Topic | Guide |
+| --- | --- |
+| API design (URLs, errors, pagination, versioning) | [coding-guidelines/api-design.md](coding-guidelines/api-design.md) |
+| Database and migrations | [coding-guidelines/database.md](coding-guidelines/database.md) |
+| Security engineering | [coding-guidelines/security.md](coding-guidelines/security.md) |
+| Code reviews | [coding-guidelines/reviews.md](coding-guidelines/reviews.md) |
+| Documentation and comments | [coding-guidelines/documentation.md](coding-guidelines/documentation.md) |
+
 ## All languages
 
 ### Formatting and linting

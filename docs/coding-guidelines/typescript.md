@@ -106,6 +106,8 @@ Anti-patterns: `any` (needs a justifying comment; prefer `unknown` + narrowing),
 
 ## APIs and services
 
+API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+
 - `Bun.serve` directly for small services; [Hono](https://hono.dev/) when routing/middleware outgrows it.
 - Prefer built-in Bun APIs (`Bun.file`, `bun:sqlite`, `Bun.env`) over Node polyfills where practical.
 - Handlers stay thin: validate (zod) → call service → shape response.
