@@ -21,7 +21,8 @@ pre-commit install
 
 This repository follows BigTech+ engineering standards inherited from [thebigtechplus/.github](https://github.com/thebigtechplus/.github) unless noted otherwise:
 
-- [CONTRIBUTING](https://github.com/thebigtechplus/.github/blob/main/CONTRIBUTING.md) — branching, commits, reviews
+- [CONTRIBUTING](https://github.com/thebigtechplus/.github/blob/main/CONTRIBUTING.md) — branching, commits, reviews, tech stack rules
+- [Coding guidelines](https://github.com/thebigtechplus/.github/blob/main/docs/coding-guidelines.md) — Go, Python, TypeScript, Rust style
 - [SECURITY](https://github.com/thebigtechplus/.github/blob/main/SECURITY.md) — security reporting
 - [AGENTS.md](AGENTS.md) — instructions for AI coding agents (Claude Code reads this via [CLAUDE.md](CLAUDE.md))
 
