@@ -1,3 +1,5 @@
+> မြန်မာဘာသာဖြင့် ဖတ်ရန် — [SECURITY.my.md](SECURITY.my.md)
+
 # Security Policy
 
 ## Reporting
