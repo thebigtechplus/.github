@@ -17,6 +17,15 @@ gh bootstrap-repo <repo-name> --create
 
 See [docs/new-repo.md](docs/new-repo.md).
 
+## Tech stack
+
+- **Primary languages: Go, Python, TypeScript, Rust.** Starting a project in another language requires sign-off from the [`admins`](https://github.com/orgs/thebigtechplus/teams/admins) team first.
+- **JavaScript/TypeScript package managers: pnpm or bun only.** npm is banned — do not commit `package-lock.json` or `npm-shrinkwrap.json` (pre-commit rejects them).
+- **TypeScript servers and APIs run on the [Bun](https://bun.sh/) runtime**, not Node.
+- **Work conversation happens on Microsoft Teams and Slack only.** Do not move work discussion to personal messengers. Durable decisions belong in issues and pull requests, not chat.
+
+Coding style: see [docs/coding-guidelines.md](docs/coding-guidelines.md).
+
 ## AI-assisted development
 
 BigTech+ developers use AI tools (Claude, Codex, Cursor) as assistants, not as authors of record.

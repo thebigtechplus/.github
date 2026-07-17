@@ -16,6 +16,12 @@ Instructions for AI coding agents (Claude Code, Codex, Cursor) working in this r
 - Lint: `pnpm lint`
 -->
 
+## Tech stack rules
+
+- JavaScript/TypeScript packages: use **pnpm or bun only**. npm is banned — never run `npm install` or create/commit `package-lock.json` or `npm-shrinkwrap.json`.
+- TypeScript servers and APIs run on the **Bun runtime**, not Node.
+- Follow the [org coding guidelines](https://github.com/thebigtechplus/.github/blob/main/docs/coding-guidelines.md) (Go, Python, TypeScript, Rust).
+
 ## Git conventions
 
 - Branch from `main`. Name branches `type/issue-number-brief-description` (for example, `feat/12-add-login`).

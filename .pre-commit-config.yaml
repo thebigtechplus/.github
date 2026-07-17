@@ -30,3 +30,10 @@ repos:
     rev: v8.30.0
     hooks:
       - id: gitleaks
+  - repo: local
+    hooks:
+      - id: forbid-npm-lockfiles
+        name: forbid npm lockfiles (use pnpm or bun)
+        entry: npm lockfiles are banned — use pnpm or bun
+        language: fail
+        files: (^|/)(package-lock\.json|npm-shrinkwrap\.json)$
