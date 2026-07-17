@@ -100,7 +100,7 @@ Anti-patterns: mutable default arguments (the default is created **once** at def
 
 ## APIs and services
 
-API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+API contract rules (style choice, REST, GraphQL, gRPC, realtime, events): [api-design.md](api-design.md).
 
 - [FastAPI](https://fastapi.tiangolo.com/) is the default for APIs and lightweight services; pydantic models validate all request/response bodies — validation at the edge means domain code never sees malformed data, and the OpenAPI schema falls out for free.
 - [Django](https://www.djangoproject.com/) (with [Django REST Framework](https://www.django-rest-framework.org/) for APIs) for full-featured web applications — when you need admin, ORM, auth, and sessions, Django's integrated versions have twenty years of hardening that a hand-assembled equivalent will not reach. Follow Django's app structure: one app per domain feature, fat models/services, thin views.

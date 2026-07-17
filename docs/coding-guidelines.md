@@ -17,7 +17,7 @@ Primary languages are **Go, Python, TypeScript, and Rust** (see [CONTRIBUTING.md
 
 | Topic | Guide |
 | --- | --- |
-| API design (URLs, errors, pagination, versioning) | [coding-guidelines/api-design.md](coding-guidelines/api-design.md) |
+| API design (REST, GraphQL, gRPC, realtime, events) | [coding-guidelines/api-design.md](coding-guidelines/api-design.md) |
 | Database and migrations | [coding-guidelines/database.md](coding-guidelines/database.md) |
 | Security engineering | [coding-guidelines/security.md](coding-guidelines/security.md) |
 | Code reviews | [coding-guidelines/reviews.md](coding-guidelines/reviews.md) |

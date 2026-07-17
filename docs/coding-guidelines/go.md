@@ -85,7 +85,7 @@ Anti-patterns: interface bloat (an interface with one implementation and no cons
 
 ## APIs and services
 
-API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+API contract rules (style choice, REST, GraphQL, gRPC, realtime, events): [api-design.md](api-design.md).
 
 - Standard library `net/http` first; add a router (e.g. `chi`) when routing outgrows it. The stdlib is where Go's compatibility promise lives — every framework you add is a dependency that can break, lag, or die.
 - Handlers decode/validate input, call a service, encode output — no business logic in handlers. Logic in handlers can only be tested through HTTP, which is slower and couples your business rules to a transport.

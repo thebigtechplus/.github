@@ -81,7 +81,7 @@ Anti-patterns: `clone()` to silence the borrow checker (each such clone is a hid
 
 ## APIs and services
 
-API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+API contract rules (style choice, REST, GraphQL, gRPC, realtime, events): [api-design.md](api-design.md).
 
 - [axum](https://docs.rs/axum) is the default web framework; extractors validate input at the boundary (serde + validation), handlers stay thin — extractors turn "forgot to validate" into a type error, since the handler cannot even be called without successfully parsed input.
 - JSON fields `camelCase` via `#[serde(rename_all = "camelCase")]`; time is RFC 3339 UTC (`chrono`/`time` with serde).

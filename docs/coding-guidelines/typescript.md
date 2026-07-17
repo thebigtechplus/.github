@@ -110,7 +110,7 @@ Anti-patterns: `any` (it disables checking not just here but for everything the 
 
 ## APIs and services
 
-API contract rules (URLs, status codes, errors, pagination): [api-design.md](api-design.md).
+API contract rules (style choice, REST, GraphQL, gRPC, realtime, events): [api-design.md](api-design.md).
 
 - `Bun.serve` directly for small services; [Hono](https://hono.dev/) when routing/middleware outgrows it — start with zero dependencies and add the framework when the need is demonstrated, not anticipated.
 - Prefer built-in Bun APIs (`Bun.file`, `bun:sqlite`, `Bun.env`) over Node polyfills where practical — natives are faster and better supported; the compatibility layer exists for migration, not as a first choice.
