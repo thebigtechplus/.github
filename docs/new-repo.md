@@ -1,3 +1,5 @@
+> မြန်မာဘာသာဖြင့် ဖတ်ရန် — [new-repo.my.md](new-repo.my.md)
+
 # New repository checklist
 
 **Requires [GitHub CLI](https://cli.github.com/)** (`gh`), authenticated with access to `thebigtechplus`. All developers use `gh` for this workflow.
@@ -50,10 +52,10 @@ pwsh -File $script api -Create
 
 If you already have this repo checked out:
 
-| Platform | Command |
-| --- | --- |
-| macOS / Linux / Git Bash / WSL | `./scripts/bootstrap-repo.sh <repo-name> --create` |
-| Windows (PowerShell) | `pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create` |
+| Platform                       | Command                                                 |
+| ------------------------------ | ------------------------------------------------------- |
+| macOS / Linux / Git Bash / WSL | `./scripts/bootstrap-repo.sh <repo-name> --create`      |
+| Windows (PowerShell)           | `pwsh ./scripts/bootstrap-repo.ps1 <repo-name> -Create` |
 
 ## What bootstrap configures
 
@@ -72,6 +74,7 @@ After bootstrap, install pre-commit locally:
 
 ```bash
 pip install pre-commit
+
 pre-commit install
 pre-commit run --all-files
 ```
@@ -97,12 +100,12 @@ Org `CODEOWNERS` does not inherit. Add a root `CODEOWNERS` file:
 
 ### 3. Create labels
 
-| Name | Suggested color | Purpose |
-| --- | --- | --- |
-| `bug` | `#d73a4a` | Bug reports |
-| `enhancement` | `#a2eeef` | Feature requests |
-| `dependencies` | `#0366d6` | Dependency updates (if using Dependabot) |
-| `github-actions` | `#2088FF` | Actions-related Dependabot PRs (optional) |
+| Name             | Suggested color | Purpose                                   |
+| ---------------- | --------------- | ----------------------------------------- |
+| `bug`            | `#d73a4a`       | Bug reports                               |
+| `enhancement`    | `#a2eeef`       | Feature requests                          |
+| `dependencies`   | `#0366d6`       | Dependency updates (if using Dependabot)  |
+| `github-actions` | `#2088FF`       | Actions-related Dependabot PRs (optional) |
 
 ### 4. Branch protection on `main` (manual)
 
