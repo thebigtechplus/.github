@@ -2,7 +2,7 @@
 
 Org addendum for TypeScript. Baseline: [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html). Cross-language rules: [coding-guidelines.md](../coding-guidelines.md).
 
-Hard org rules ([CONTRIBUTING.md](../../CONTRIBUTING.md#tech-stack)): **servers and APIs run on the [Bun](https://bun.sh/) runtime**, packages are managed with **pnpm or bun only — npm is banned** (pre-commit rejects `package-lock.json`), and PHP/Laravel is banned — TypeScript on Bun is the default web backend.
+Hard org rules ([CONTRIBUTING.md](../../CONTRIBUTING.md#tech-stack)): **servers and APIs run on the [Bun](https://bun.sh/) runtime**, and packages are managed with **pnpm or bun only — npm is banned** (pre-commit rejects `package-lock.json`). TypeScript on Bun is the default web backend.
 
 ## Tooling
 
