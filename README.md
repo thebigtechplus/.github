@@ -1,4 +1,8 @@
-# BigTech+ `.github` repository
+<h1 align="center">BigTech+ <code>.github</code> repository</h1>
+
+<p align="center">
+  <b>English</b> | <a href="README.my.md">မြန်မာ</a>
+</p>
 
 Canonical GitHub defaults and engineering standards for the [BigTech+](https://github.com/thebigtechplus) organization.
 
